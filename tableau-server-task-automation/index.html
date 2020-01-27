@@ -7,6 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        .card:hover {
+            opacity: 0.8;
+            background-color: azure;
+        }
+    </style>
     <title>The lazy Tableau Server admin's guide to automation</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -20,22 +26,73 @@
     crossorigin="anonymous"></script>
 
 <body>
-    <div class="container">
-        <div class="jumbotron">
+    <div class="container col-lg-8 col-md-10 col-sm-12">
+        <div class="jumbotron text-center">
+            <h1 style="color: red;">THIS SITE IS WIP</h1>
             <h1 class="display-4">The lazy Tableau Server admin's guide to automation</h1>
+            <p class="lead">Being a Tableau Server admin can be boring. There I said it.</p>
         </div>
-        <div class="col-lg-8 text-center">
+        <div>
             <p>
-                Being a Tableau Server admin can be boring. There I said it. Sometimes you’re stuck doing manual tasks
+                Sometimes you’re stuck doing manual tasks
                 or fixing problems that you already know the answer to……and that ain’t always engaging stuff, when all
-                you really wanna do is watch some videos of cats (dear god, NO NOT THE MOVIE) or some cam footage of
+                you really wanna do is watch some videos of cats (oh dear god, NO NOT THE MOVIE) or some cam footage of
                 Russian drivers randomly crashing into each other for no apparent reason.
+            </p>
+            <p>
                 Luckily, I’ve found the solution. This series is about how you too can spend more time watching internet
                 memes, instead of administering Tableau Server - via the magic of automation. There are automation
                 options for many different aspects of Tableau Server, such as installation, monitoring, and testing.
                 However, this series will focus on common tasks such as creation of projects/groups, addition of users
                 to sites/group, and deployment of workbooks/datasources.
             </p>
+            <p>
+                To be begin, select an option from below.
+            </p>
+        </div>
+        <div class="row">
+            <div class="card col-lg-4 col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">The Basics</h5>
+                    <p class="card-text">If you already have a decent grasp of Python, you can probably skip this.</p>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+            <div class="card col-lg-4 col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">Logging in and getting basic information via Tableau Server API </h5>
+                    <p class="card-text">This section will go through the basics of using the Tableau REST API Python client.</p>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+            <div class="card col-lg-4 col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">User/Group Management </h5>
+                    <p class="card-text">This section will discuss how you can automate the process of adding or removing users from Tableau Server groups.</p>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+            <div class="card col-lg-4 col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">Creating Projects and Groups</h5>
+                    <p class="card-text">This section will discuss how you can automate the creation of projects and groups.</p>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+            <div class="card col-lg-4 col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">Publishing Content via the API</h5>
+                    <p class="card-text">This section will discuss how you can automate the publish of datasoures and workbooks from a file, or between projects or sites.</p>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+            <div class="card col-lg-4 col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">Getting around the limitations</h5>
+                    <p class="card-text">Once you've used the Python REST API Client for a while, you'll notice some limitations - this section offers some tips on dealing with them.</p>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
         </div>
     </div>
 
