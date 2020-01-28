@@ -47,7 +47,6 @@
     </nav>
     <div class="container col-lg-8 col-md-10 col-sm-12">
         <div id="home" class="jumbotron text-center">
-            <h5 style="color: red;">THIS SITE IS CURRENTLY WIP</h5>
             <h1 class="display-4">The lazy Tableau Server admin's guide to automation</h1>
             <p class="lead">Being a Tableau Server admin can be boring. There I said it.</p>
         </div>
@@ -87,7 +86,7 @@
             </div>
             <div class="card col-lg-4 col-md-6">
                 <div class="card-body">
-                    <h5 class="card-title">User/Group Management </h5>
+                    <h5 class="card-title">User/Group Management</h5>
                     <p class="card-text">This section will discuss how you can automate the process of adding or
                         removing users from Tableau Server groups.</p>
                     <a href="#manageUsers" class="stretched-link"></a>
@@ -135,9 +134,76 @@
                     supported</u> Python library, which does most of the foundation work for us - <a
                     href="https://github.com/tableau/server-client-python">https://github.com/tableau/server-client-python</a>
             </p>
+            <p>To get started using the API, we'll need to do the following: <br />
+                <ol>
+                    <li>Make sure you have a <b>test environment</b> OR at the very least, a test site for Tableau
+                        Server - I can't stress this enough. Mucking around with the API in a production environment is
+                        likely to end....badly.</li>
+                    <li>Install Python as per instructions here - <a
+                            href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>. Do yourself
+                        a favour and use Python3.</li>
+                    <li><i>(Optional)</i> Consider setting up a Python virtual environment for your Tableau related
+                        projects - <a
+                            href="https://docs.python.org/3/tutorial/venv.html">https://docs.python.org/3/tutorial/venv.html</a>.
+                        This is not required but is generally a very good habit to get into when working with Python.
+                    </li>
+                    <li>Install the tableauserverclient Python library as per instructions here - <a
+                            href="https://tableau.github.io/server-client-python/docs/">https://tableau.github.io/server-client-python/docs/</a>
+                    </li>
+                </ol>
+            </p>
         </div>
         <div class="pt-5" id="apiIntro">
             <p class="lead">Logging in and getting basic information via Tableau Server API</p>
+            <p>Now that we have everything installed, its time to start playing with the API on our <b>TEST Tableau
+                    Server environment/site</b>.
+                <p>
+                    To login, we can follow the documentation <a
+                        href="https://tableau.github.io/server-client-python/docs/sign-in-out">here</a>.</p>
+                <pre><code>
+                    import tableauserverclient as TSC
+    
+                    tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', `SITENAME`)
+                    server = TSC.Server('https://SERVER_URL')
+                    import tableauserverclient as TSC
+
+                    tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD')
+                    server = TSC.Server('http://SERVER_URL')
+
+                    # sign in here
+                    server.auth.sign_in(tableau_auth)
+
+                    # do what you want to do
+                    my_amazing_function_to_automate_everything()    
+
+                    # sign out when you're done
+                    server.auth.sign_out()           
+                </code></pre>
+            </p>
+        </div>
+        <div class="pt-5" id="manageUsers">
+            <p class="lead">User/Group Management</p>
+            <p>
+                WIP
+            </p>
+        </div>
+        <div class="pt-5" id="createProjects">
+            <p class="lead">Creating Projects and Groups</p>
+            <p>
+                WIP
+            </p>
+        </div>
+        <div class="pt-5" id="publish">
+            <p class="lead">Publishing Content via the API</p>
+            <p>
+                WIP
+            </p>
+        </div>
+        <div class="pt-5" id="tips">
+            <p class="lead">Getting around the limitations</p>
+            <p>
+                WIP
+            </p>
         </div>
         <div class="pt-5" id="about">
             <p class="lead">About</p>
