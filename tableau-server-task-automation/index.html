@@ -26,8 +26,27 @@
     crossorigin="anonymous"></script>
 
 <body>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mx-auto align-items-center justify-content-between">
+                <li class="nav-item">
+                    <a class="nav-brand mx-0" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tutorials">Tutorials</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container col-lg-8 col-md-10 col-sm-12">
-        <div class="jumbotron text-center">
+        <div id="home" class="jumbotron text-center">
             <h5 style="color: red;">THIS SITE IS CURRENTLY WIP</h5>
             <h1 class="display-4">The lazy Tableau Server admin's guide to automation</h1>
             <p class="lead">Being a Tableau Server admin can be boring. There I said it.</p>
@@ -40,7 +59,7 @@
                 Russian drivers randomly crashing into each other for no apparent reason.
             </p>
             <p>
-                Luckily, I’ve found the solution. This series is about how you too can spend more time watching internet
+                Luckily, there is a solution. This series is about how you too can spend more time watching internet
                 memes, instead of administering Tableau Server - via the magic of automation. There are automation
                 options for many different aspects of Tableau Server, such as installation, monitoring, and testing.
                 However, this series will focus on common tasks such as creation of projects/groups, addition of users
@@ -50,12 +69,12 @@
                 To be begin, select an option from below.
             </p>
         </div>
-        <div class="row">
+        <div id="tutorials" class="row pt-5">
             <div class="card col-lg-4 col-md-6">
                 <div class="card-body">
                     <h5 class="card-title">The Basics</h5>
                     <p class="card-text">If you already have a decent grasp of Python, you can probably skip this.</p>
-                    <a href="#" class="stretched-link"></a>
+                    <a href="#basics" class="stretched-link"></a>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6">
@@ -63,7 +82,7 @@
                     <h5 class="card-title">Logging in and getting basic information via Tableau Server API </h5>
                     <p class="card-text">This section will go through the basics of using the Tableau REST API Python
                         client.</p>
-                    <a href="#" class="stretched-link"></a>
+                    <a href="#apiIntro" class="stretched-link"></a>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6">
@@ -71,7 +90,7 @@
                     <h5 class="card-title">User/Group Management </h5>
                     <p class="card-text">This section will discuss how you can automate the process of adding or
                         removing users from Tableau Server groups.</p>
-                    <a href="#" class="stretched-link"></a>
+                    <a href="#manageUsers" class="stretched-link"></a>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6">
@@ -79,7 +98,7 @@
                     <h5 class="card-title">Creating Projects and Groups</h5>
                     <p class="card-text">This section will discuss how you can automate the creation of projects and
                         groups.</p>
-                    <a href="#" class="stretched-link"></a>
+                    <a href="#createProjects" class="stretched-link"></a>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6">
@@ -87,7 +106,7 @@
                     <h5 class="card-title">Publishing Content via the API</h5>
                     <p class="card-text">This section will discuss how you can automate the publish of datasoures and
                         workbooks from a file, or between projects or sites.</p>
-                    <a href="#" class="stretched-link"></a>
+                    <a href="#publish" class="stretched-link"></a>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6">
@@ -95,9 +114,37 @@
                     <h5 class="card-title">Getting around the limitations</h5>
                     <p class="card-text">Once you've used the Python REST API Client for a while, you'll notice some
                         limitations - this section offers some tips on dealing with them.</p>
-                    <a href="#" class="stretched-link"></a>
+                    <a href="#tips" class="stretched-link"></a>
                 </div>
             </div>
+        </div>
+        <div class="pt-5" id="basics">
+            <p class="lead">The Basics</p>
+            <p>
+                The core of what we'll be leveraging is the Tableau Server REST API - an XML based endpoint to which we
+                send <b>requests</b>, and receive back back <b>responses.</b>
+            </p>
+            <p>
+                The API is documented in all its glory <a
+                    href="https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm">here</a> - feel
+                free to follow the link and check it out.
+            </p>
+            <p>
+                Now that you've skimmed through all 86367284 pages of that monstrosity, I'm here to tell you that we
+                will <b>NOT</b> be using that page to construct XML manually - instead we'll use a nice <u>Tableau
+                    supported</u> Python library, which does most of the foundation work for us - <a
+                    href="https://github.com/tableau/server-client-python">https://github.com/tableau/server-client-python</a>
+            </p>
+        </div>
+        <div class="pt-5" id="apiIntro">
+            <p class="lead">Logging in and getting basic information via Tableau Server API</p>
+        </div>
+        <div class="pt-5" id="about">
+            <p class="lead">About</p>
+            <p>
+                If you have any questions or feedback, feel free to contact me via <a
+                    href="mailto: forzabarca88@gmail.com">email</a>.
+            </p>
         </div>
     </div>
 
