@@ -156,29 +156,64 @@
         <div class="pt-5" id="apiIntro">
             <p class="lead">Logging in and getting basic information via Tableau Server API</p>
             <p>Now that we have everything installed, its time to start playing with the API on our <b>TEST Tableau
-                    Server environment/site</b>.
-                <p>
+                    Server environment/site</b>.<br/><br/>
                     To login, we can follow the documentation <a
-                        href="https://tableau.github.io/server-client-python/docs/sign-in-out" target="_blank">here</a>.</p>
+                        href="https://tableau.github.io/server-client-python/docs/sign-in-out" target="_blank">here</a>. We'll keep it simple and use user/pass to login instead of dealing with Personal Access Tokens.
                 <pre><code>
                     import tableauserverclient as TSC
     
-                    tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', `SITENAME`)
+                    tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', site_id=`SITENAME`)
                     server = TSC.Server('https://SERVER_URL')
-                    import tableauserverclient as TSC
 
-                    tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD')
-                    server = TSC.Server('http://SERVER_URL')
+                    # sets the correct API version for your version of server
+                    # without this it defaults to a very old version
+                    server.use_server_version()
 
                     # sign in here
                     server.auth.sign_in(tableau_auth)
 
                     # do what you want to do
-                    my_amazing_function_to_automate_everything()    
+                    my_amazing_function_to_automate_everything(server)    
 
                     # sign out when you're done
                     server.auth.sign_out()           
                 </code></pre>
+            </p>
+            <p>
+                Now that we're signed in, we can start sending requests to Tableau Server. For instance, we can get a list of all users on our site by running this:
+                <pre><code>
+                    # get all the users
+                    all_users = TSC.Pager(server.users)
+
+                    # do stuff for each user
+                    for user in all_users:
+                        if user.name == 'joe'
+                            print(user.site_role)
+                </code></pre>
+                The key part here is the <code>server.users</code> - each resource such as <i>projects</i>, <i>groups</i>, etc. has an equivalent similar to this. So if instead we were to get a list of all other resources, we could run code as below:
+                <pre><code>
+                    # get all groups
+                    all_groups = TSC.Pager(server.groups) 
+
+                    # get all projects
+                    all_projects = TSC.Pager(server.projects) 
+
+                    # get all published datasources
+                    all_ds = TSC.Pager(server.datasources) 
+                </code></pre>
+                Now that we know how to get a <b>collection</b> of everything, it becomes fairly straight forward to get a  <b>specific</b> user/group/any resource from that collection. We just need to filter it out based on what makes it unique within the site (e.g. User ID for users, group name for groups, project name + workbook name for a workbook, etc).
+                <pre><code>
+                    # get all groups
+                    all_groups = TSC.Pager(server.groups)
+                    
+                    # filter out the group name we're looking for
+                    # using the assumption that group name is unique in our site
+                    for group in groups:
+                        if group.name == 'My Group':
+                            my_group = group
+                            break # this just exits the for loop since we've found what we're looking for
+                </code></pre>
+                <b>NOTE:</b> You can also filter individual items using RequestOptions as shown here - <a href="https://tableau.github.io/server-client-python/docs/filter-sort">https://tableau.github.io/server-client-python/docs/filter-sort</a>. As of TSC v9.0, using RequestOptions does have some caveats around searching special characters though (you'll need to urlencode the search parameters).
             </p>
         </div>
         <div class="pt-5" id="manageUsers">
