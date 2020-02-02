@@ -261,23 +261,48 @@
         <div class="pt-5" id="createProjects">
             <p class="lead">Creating Projects and Groups</p>
             <p>
-                WIP
+                While creating a new project and group is straight forward, as of TSC v0.9 you <b>CANNOT</b> set the default project permissions via the Python API. This is a shame because that's probably the most time consuming part - however, it's not as difficult as you might think to write your own functions to get around this problem (I'll talk about this in the <i>Getting around the limitations</i> section).
+            </p>
+            <p>
+                For now, lets talk about the task of simply creating our Projects and Groups - the reference for this can be found <a href="https://tableau.github.io/server-client-python/docs/api-ref#projects">here</a> and <a href="https://tableau.github.io/server-client-python/docs/api-ref#groups">here</a>.
+                <pre><code>
+                    # Login to Tableau Server environment
+                    import tableauserverclient as TSC
+                    tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', site_id=`SITENAME`)
+                    server = TSC.Server('https://SERVER_URL', use_server_version=True)
+                    server.auth.sign_in(tableau_auth)
+
+                    # let's create the representation of our new project
+                    my_project = TSC.ProjectItem(name='My Project', 
+                                                content_permissions='LockedToProject',
+                                                description='This is my project!!!', 
+                                                parent_id=None)
+                    # create our project 
+                    new_project = server.projects.create(my_project)
+
+                    # now let's create our group - it's dead easy!
+                    my_group = 'My Group'
+                    new_group = server.groups.create(TSC.GroupItem(my_group))
+                </code></pre>
             </p>
         </div>
         <div class="pt-5" id="publish">
             <p class="lead">Publishing Content via the API</p>
             <p>
-                WIP
+                This section is currently WIP - stay tuned!
             </p>
         </div>
         <div class="pt-5" id="tips">
             <p class="lead">Getting around the limitations</p>
             <p>
-                WIP
+                This section is currently WIP - stay tuned!
             </p>
         </div>
         <div class="pt-5" id="about">
             <p class="lead">About</p>
+            <p>
+                I hope this gave you a good intro to the Tableau Server REST Python Client - there's a LOT more that you can do with it, and I'd strongly recommend getting familiar with the Reference documentation linked throughout this tutorial.
+            </p>
             <p>
                 If you have any questions or feedback, feel free to contact me via <a
                     href="mailto: forzabarca88@gmail.com">email</a>.
