@@ -65,7 +65,7 @@
                 to sites/group, and deployment of workbooks/datasources.
             </p>
             <p>
-                To be begin, select an option from below.
+                To be begin, select an option from below - please that the assumed Tableau Server version for these tutorials is <b>2019.3</b>, but for the most part these steps should work in older/newer versions.
             </p>
         </div>
         <div id="tutorials" class="row pt-5">
@@ -155,8 +155,8 @@
         </div>
         <div class="pt-5" id="apiIntro">
             <p class="lead">Logging in and getting basic information via Tableau Server API</p>
-            <p>Now that we have everything installed, its time to start playing with the API on our <b>TEST Tableau
-                    Server environment/site</b>.<br/><br/>
+            <p>Now that we have everything installed, its time to start playing with the API on our <b>TEST</b> Tableau
+                    Server environment/site.<br/><br/>
                     To login, we can follow the documentation <a
                         href="https://tableau.github.io/server-client-python/docs/sign-in-out" target="_blank">here</a>. We'll keep it simple and use user/pass to login instead of dealing with Personal Access Tokens.
                 <pre><code>
@@ -213,13 +213,49 @@
                             my_group = group
                             break # this just exits the for loop since we've found what we're looking for
                 </code></pre>
-                <b>NOTE:</b> You can also filter individual items using RequestOptions as shown here - <a href="https://tableau.github.io/server-client-python/docs/filter-sort">https://tableau.github.io/server-client-python/docs/filter-sort</a>. As of TSC v9.0, using RequestOptions does have some caveats around searching special characters though (you'll need to urlencode the search parameters).
+                <b>NOTE:</b> You can also filter individual items using RequestOptions as shown here - <a href="https://tableau.github.io/server-client-python/docs/filter-sort">https://tableau.github.io/server-client-python/docs/filter-sort</a>. As of TSC v9.0, using RequestOptions does have some caveats around searching special characters (you'll need to urlencode the search parameters). 
+                <br/> <br/>
+                BUT it's a more efficient method of filtering, so you should definitely considering using it once you're more familiar with the API.
             </p>
         </div>
         <div class="pt-5" id="manageUsers">
             <p class="lead">User/Group Management</p>
             <p>
-                WIP
+                Since the recommended way to manage project permissions (which you should be locking at project level by the way) is via adding users to groups, and groups can only be modified by Server/Site admins, there's a good chance that you'll be stuck managing this tedious process.
+            </p>
+            <p>
+                Thankfully, it's fairly simple via the API to manage users and groups. The following code is based on the reference material <a href="https://tableau.github.io/server-client-python/docs/api-ref#users">here</a> and <a href="https://tableau.github.io/server-client-python/docs/api-ref#groups">here</a>.
+                <pre><code>
+                    # Login to Tableau Server environment
+                    import tableauserverclient as TSC
+                    tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', site_id=`SITENAME`)
+                    server = TSC.Server('https://SERVER_URL', use_server_version=True)
+                    server.auth.sign_in(tableau_auth)
+
+                    # create an object that represents the new user
+                    user_logon_id = 'joe'
+                    site_role = 'Publisher'
+                    user_item = TSC.UserItem(user_logon_id, site_role)
+                    new_user = server.users.add(user_item)
+
+                    # show the new user that was created
+                    print(new_user)
+
+                    # add the user to an existing group
+                    # find group called 'My Group' from the full list of groups in the site
+                    for group in TSC.Pager(server.groups):
+                        if group.name == 'My Group'
+                            my_group = group
+                            break
+                    # don't foget to add your own error handling here - what if my group doesn't exist?
+                    # ...
+
+                    # now add our new user to the group
+                    server.groups.add_user(my_group, new_user.id)
+
+                    # we could just as easily do the reverse, and remove the user from the group
+                    server.groups.remove_user(my_group, new_user.id)
+                </code></pre>
             </p>
         </div>
         <div class="pt-5" id="createProjects">
